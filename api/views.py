@@ -16,3 +16,7 @@ def apiOverview(request):
 
     }
     return Response(api_urls)
+
+@api_view(['GET'])
+def taskList(request):
+    return Response()
