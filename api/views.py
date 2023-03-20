@@ -21,7 +21,6 @@ class ApiOverview(generics.GenericAPIView):
 
     """
     def get(self, request, *args, **kwargs):
-        # Use Django REST Framework's `reverse` function to generate URLs for the endpoints
         api_urls = {
             'List': reverse('task-list', request=request),
             'Create': reverse('task-list', request=request),
@@ -30,7 +29,6 @@ class ApiOverview(generics.GenericAPIView):
             'Delete': reverse('task-detail', args=[1], request=request),
         }
 
-        # Return the API URLs as a JSON response
         return Response(api_urls)
 
 class TaskList(generics.ListCreateAPIView):
