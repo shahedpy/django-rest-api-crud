@@ -1,9 +1,9 @@
 from django.db import models
 
 
-class Task(models.Model):
-    title = models.CharField(max_length=200)
-    completed = models.BooleanField(default=False, blank=True, null=True)
+class Students(models.Model):
+    name = models.CharField(max_length=200)
+    email = models.EmailField()
 
     def __str__(self):
-        return self.title
+        return self.name

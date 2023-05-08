@@ -1,8 +1,8 @@
-from rest_framework import generics
+from rest_framework import generics, authentication, permissions
 from rest_framework.response import Response
 from rest_framework.reverse import reverse
-from .serializers import TaskSerializer
-from .models import Task
+from .serializers import StudentSerializer
+from .models import Students
 
 
 class ApiOverview(generics.GenericAPIView):
@@ -13,28 +13,32 @@ class ApiOverview(generics.GenericAPIView):
 
     Endpoints
     ---------
-    - List all tasks: {base_url}/tasks/ (GET)
-    - Create a new task: {base_url}/tasks/ (POST)
-    - Retrieve a task by ID: {base_url}/tasks/<int:pk>/ (GET)
-    - Update a task by ID: {base_url}/tasks/<int:pk>/ (PUT/PATCH)
-    - Delete a task by ID: {base_url}/tasks/<int:pk>/ (DELETE)
+    - List all students: {base_url}/students/ (GET)
+    - Create a new student: {base_url}/students/ (POST)
+    - Retrieve a students by ID: {base_url}/students/<int:pk>/ (GET)
+    - Update a student by ID: {base_url}/students/<int:pk>/ (PUT/PATCH)
+    - Delete a student by ID: {base_url}/students/<int:pk>/ (DELETE)
 
     """
     def get(self, request, *args, **kwargs):
         api_urls = {
-            'List': reverse('task-list', request=request),
-            'Create': reverse('task-list', request=request),
-            'Retrieve': reverse('task-detail', args=[1], request=request),
-            'Update': reverse('task-detail', args=[1], request=request),
-            'Delete': reverse('task-detail', args=[1], request=request),
+            'List': reverse('students-list', request=request),
+            'Create': reverse('students-list', request=request),
+            'Retrieve': reverse('students-detail', args=[1], request=request),
+            'Update': reverse('students-detail', args=[1], request=request),
+            'Delete': reverse('students-detail', args=[1], request=request),
         }
 
         return Response(api_urls)
 
-class TaskList(generics.ListCreateAPIView):
-    queryset = Task.objects.all()
-    serializer_class = TaskSerializer
+class StudentList(generics.ListCreateAPIView):
+    queryset = Students.objects.all()
+    serializer_class = StudentSerializer
+    authentication_classes = [authentication.SessionAuthentication]
+    permission_classes = [permissions.IsAuthenticated]
 
-class TaskDetail(generics.RetrieveUpdateDestroyAPIView):
-    queryset = Task.objects.all()
-    serializer_class = TaskSerializer
+class StudentDetail(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Students.objects.all()
+    serializer_class = StudentSerializer
+    authentication_classes = [authentication.SessionAuthentication]
+    permission_classes = [permissions.IsAuthenticated]

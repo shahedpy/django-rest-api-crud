@@ -7,20 +7,19 @@ SECRET_KEY = 'django-insecure-m-@z)==@9d7wql!vi4v171#r$6jf&s(6#%a@k^legyqxz64x+6
 DEBUG = True
 
 ALLOWED_HOSTS = [
-    '192.168.3.39',
-    '192.168.1.95',
-    '192.168.1.192',
+    '127.0.0.1'
 ]
 
 INSTALLED_APPS = [
-    'api',
-    'rest_framework',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'rest_framework',
+    'rest_framework_simplejwt',
+    'api',
 ]
 
 MIDDLEWARE = [
@@ -32,6 +31,14 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework.authentication.TokenAuthentication',
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+    ),
+}
+
 
 ROOT_URLCONF = 'todo_drf.urls'
 

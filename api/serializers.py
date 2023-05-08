@@ -1,7 +1,7 @@
 from rest_framework import serializers
-from .models import Task
+from .models import Students
 
-class TaskSerializer(serializers.ModelSerializer):
+class StudentSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Task
+        model = Students
         fields = '__all__'
