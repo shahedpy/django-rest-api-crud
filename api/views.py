@@ -24,9 +24,9 @@ class ApiOverview(generics.GenericAPIView):
         api_urls = {
             'List': reverse('students-list', request=request),
             'Create': reverse('students-list', request=request),
-            'Retrieve': reverse('students-detail', args=[1], request=request),
-            'Update': reverse('students-detail', args=[1], request=request),
-            'Delete': reverse('students-detail', args=[1], request=request),
+            'Retrieve': reverse('student-detail', args=[1], request=request),
+            'Update': reverse('student-detail', args=[1], request=request),
+            'Delete': reverse('student-detail', args=[1], request=request),
         }
 
         return Response(api_urls)
