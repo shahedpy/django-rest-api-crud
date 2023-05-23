@@ -20,7 +20,8 @@ class ApiOverview(generics.GenericAPIView):
     - Delete a student by ID: {base_url}/students/<int:pk>/ (DELETE)
 
     """
-    def get(self, request, *args, **kwargs):
+
+    def get(self, request):
         api_urls = {
             'List': reverse('students-list', request=request),
             'Create': reverse('students-list', request=request),
@@ -31,14 +32,16 @@ class ApiOverview(generics.GenericAPIView):
 
         return Response(api_urls)
 
+
 class StudentList(generics.ListCreateAPIView):
     queryset = Students.objects.all()
     serializer_class = StudentSerializer
-    authentication_classes = [authentication.SessionAuthentication]
+    authentication_classes = [authentication.TokenAuthentication, authentication.SessionAuthentication]
     permission_classes = [permissions.IsAuthenticated]
+
 
 class StudentDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = Students.objects.all()
     serializer_class = StudentSerializer
-    authentication_classes = [authentication.SessionAuthentication]
+    authentication_classes = [authentication.TokenAuthentication, authentication.SessionAuthentication]
     permission_classes = [permissions.IsAuthenticated]
